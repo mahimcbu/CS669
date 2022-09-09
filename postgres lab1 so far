@@ -1,0 +1,26 @@
+CREATE TABLE Cars (
+CarBrand varchar(64),
+CarModel Varchar(50),
+AcquireDate Date ,
+Price DECIMAL(10,2)
+);
+INSERT INTO Cars(CarBrand,CarModel,AcquireDate,Price)
+VALUES('FORD', 'Econoline Full-Size Van', Cast('15-AUG-2021' as Date), 29995.00);
+update Cars set price = 28000.00;
+delete from Cars;
+drop table Cars;
+select * FROM Cars;
+
+
+
+
+CREATE TABLE Apartments (
+ApartmentNum decimal PRIMARY KEY,
+ApartmentName Varchar(64) NOT NULL,
+Description varchar(64) NULL,
+CleanedDate Date Not NULL,
+AvailableDate Date Not NULL
+);
+INSERT into apartments(ApartmentNum,ApartmentName,Description,CleanedDate,AvailableDate)
+values (252, null,'Close to Downtown shops',CAST('17-JUL-2020' as Date), CAST('13-JUL-2020'as Date));
+select * from Apartments;
