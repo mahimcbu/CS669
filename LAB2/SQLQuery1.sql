@@ -45,6 +45,12 @@ select customer_name,phone_model from Phone full join Customer on Customer.phone
 
 select phone_model,customer_name,customer_email from Phone full join Customer on Customer.phone_id = Phone.phone_id order by phone_model,customer_name asc;
 
+
+select phone_model,format(phone_price,'$.00') from Phone;
+
+select phone_model,format((phone_price - 50),'$.00') from Phone;
+
+select Cast(Customer.customer_name as varchar(64)) +' ('+cast(Phone.phone_model as varchar(32))+' - '+ format(cast(Phone.phone_price as decimal(6,2)),'$.00')+')' from Phone join Customer on Customer.phone_id = Phone.phone_id order by customer_name Asc;
 select * from Phone;
 
 select * from Customer;
