@@ -125,3 +125,11 @@ select dig_name, sum(Dinosaur_discovery.fossil_weight) as total_weight_above_150
 join Dinosaur_discovery on Dig_site.dig_site_id = Dinosaur_discovery.dig_site_id
 group by dig_name
 having (sum(Dinosaur_discovery.fossil_weight) >= 15000);
+
+Select first_name, last_name,location_name, count(Dig_site.dig_site_id) as nr_digsites from Paleontologist 
+join Dinosaur_discovery on Dinosaur_discovery.paleontolgist_id = Paleontologist.paleontolgist_id
+join Dig_site on Dig_site.dig_site_id = Dinosaur_discovery.dig_site_id
+join Location on Location.location_id = Dig_site.location_id
+where Location.location_id = 1
+group by first_name,last_name,location_name
+order by  count(Dig_site.dig_site_id) desc;
