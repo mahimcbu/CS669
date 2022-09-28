@@ -133,3 +133,8 @@ join Location on Location.location_id = Dig_site.location_id
 where Location.location_id = 1
 group by first_name,last_name,location_name
 order by  count(Dig_site.dig_site_id) desc;
+
+select location_name,fossil_weight from Location 
+join Dig_site on Dig_site.location_id = Location.location_id
+join Dinosaur_discovery on Dig_site.dig_site_id = Dinosaur_discovery.dig_site_id
+group by location_name,fossil_weight;
