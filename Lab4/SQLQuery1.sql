@@ -212,9 +212,9 @@ create or alter trigger post_his_trg
 on Post after update
 as
 begin
-	declare @a_old_content varchar(255) = (select content from Post);
+	declare @a_old_content varchar(255) = (select content from Deleted);
 	declare @a_new_content varchar(255) = (select content from inserted);
-	declare @a_post_id decimal(12) = (select post_id from Post);
+	declare @a_post_id decimal(12) = (select post_id from inserted);
 
 	if @a_old_content <> @a_new_content
 	begin
@@ -224,7 +224,7 @@ begin
 end;
 
 UPDATE Post 
-SET content='Hi this is 2022' WHERE Post.post_id = 3;
-	
+SET content='Hi this is 2022 welcome' WHERE Post.post_id = 3;
+
 select * from Post;
 select * from post_content_history;
