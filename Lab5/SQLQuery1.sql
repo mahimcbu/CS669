@@ -194,3 +194,75 @@ INSERT INTO Sells(sells_id, store_location_id, product_id)
 VALUES(1021, 14, 104);
 INSERT INTO Offers(offers_id, store_location_id, shipping_offering_id)
 VALUES(157, 14, 52);
+
+
+select format(price_in_us_dollars *
+		(select us_dollars_to_currency_ratio 
+		from Currency
+		where currency_name= 'Britsh Pound'), '£.00') as price_in_british_pound
+from Product 
+where product_name = 'Digital Thermometer'
+
+select product_name, format(price_in_us_dollars *
+		(select us_dollars_to_currency_ratio 
+		from Currency
+		where currency_name= 'Euro'), '€.00') as price_in_euro
+from Product 
+where price_in_us_dollars *
+		(select us_dollars_to_currency_ratio 
+		from Currency 
+		where currency_name= 'Euro') < 26  OR  price_in_us_dollars *(select us_dollars_to_currency_ratio 
+		from Currency 
+		where currency_name= 'Euro') > 299
+
+select product_name,Alternate_name.name,store_name from Store_location
+join Sells on Store_location.store_location_id = Sells.store_location_id
+join Product on Sells.product_id =Product.product_id
+join Alternate_name on Alternate_name.product_id = Product.product_id
+where Store_location.store_location_id in
+	(select Store_location.store_location_id
+	from Store_location
+	join Sells on Sells.store_location_id = Store_location.store_location_id
+	join Product on Sells.product_id =Product.product_id
+	group by Store_location.store_location_id
+	HAVING COUNT(*) > 3)
+
+
+select Product.product_name,Alternate_name.name,locations.store_name
+From (select Store_location.store_location_id, store_name
+	from Store_location
+	join Sells on Sells.store_location_id = Store_location.store_location_id
+	join Product on Sells.product_id =Product.product_id
+	group by Store_location.store_location_id,store_name
+	HAVING COUNT(*) > 3) locations
+join Sells on locations.store_location_id = Sells.store_location_id
+join Product on Sells.product_id =Product.product_id
+join Alternate_name on Alternate_name.product_id = Product.product_id
+
+
+
+
+
+select product_name,Alternate_name.name,store_name from Store_location
+join Sells on Store_location.store_location_id = Sells.store_location_id
+join Product on Sells.product_id =Product.product_id
+join Alternate_name on Alternate_name.product_id = Product.product_id
+where exists (select Desired_Store_location.store_location_id, Desired_Store_location.store_name
+	from Store_location Desired_Store_location
+	join Sells on Sells.store_location_id = Desired_Store_location.store_location_id
+	join Product on Sells.product_id =Product.product_id
+	where Desired_Store_location.store_location_id = Store_location.store_location_id
+	group by Desired_Store_location.store_location_id,Desired_Store_location.store_name
+	HAVING COUNT(*) > 3)
+
+create or alter view desired_locations as 
+select Store_location.store_location_id, Store_location.store_name
+	from Store_location
+	join Sells on Sells.store_location_id = Store_location.store_location_id
+	join Product on Sells.product_id =Product.product_id
+	group by Store_location.store_location_id, Store_location.store_name
+	HAVING COUNT(*) > 3;
+select product_name,Alternate_name.name,desired_locations.store_name from desired_locations
+join Sells on desired_locations.store_location_id = Sells.store_location_id
+join Product on Sells.product_id =Product.product_id
+join Alternate_name on Alternate_name.product_id = Product.product_id;
