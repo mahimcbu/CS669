@@ -243,12 +243,57 @@ insert into Customer(Customer_ID,First_name,Last_name,Phone_number) values(next 
 insert into Returns(Return_ID, Customer_ID,Product_name,Return_date,IsOnline,Return_reason) 
 values(next value for Return_ID_seq, (select Customer_ID from Customer where first_name = 'Marry'),'Duct tape','03-MAR-2021','y','Product not working')
 insert into Returns(Return_ID, Customer_ID,Product_name,Return_date,IsOnline,Return_reason) 
-values(next value for Return_ID_seq, (select Customer_ID from Customer where first_name = 'Sadio'),'Ink Curtridge','31-OCT-2021','n','INK cartridge does not fit')
+values(next value for Return_ID_seq, (select Customer_ID from Customer where first_name = 'Sadio'),'10x10 paper box','31-OCT-2021','n','product does not fit')
 insert into Returns(Return_ID, Customer_ID,Product_name,Return_date,IsOnline,Return_reason) 
 values(next value for Return_ID_seq, (select Customer_ID from Customer where first_name = 'Kyle'),'Gel pens','13-JUN-2022','n','Pen ink dried up')
 insert into Returns(Return_ID, Customer_ID,Product_name,Return_date,IsOnline,Return_reason) 
 values(next value for Return_ID_seq, (select Customer_ID from Customer where first_name = 'Steven'),'Stapler','21-AUG-2022','n','Stapler broke easily')
+insert into Returns(Return_ID, Customer_ID,Product_name,Return_date,IsOnline,Return_reason) 
+values(next value for Return_ID_seq, (select Customer_ID from Customer where first_name = 'Ernest'),'Hazard label','30-SEP-2021','n','Not needed anymore')
+insert into Returns(Return_ID, Customer_ID,Product_name,Return_date,IsOnline,Return_reason) 
+values(next value for Return_ID_seq, (select Customer_ID from Customer where first_name = 'Kylian'),'Laser Ink Cartridge','02-JUL-2022','n','Ink not strong enough')
+insert into Returns(Return_ID, Customer_ID,Product_name,Return_date,IsOnline,Return_reason) 
+values(next value for Return_ID_seq, (select Customer_ID from Customer where first_name = 'Jake'),'Printing paper','22-NOV-2021','y','Paper is not white enough')
+insert into Returns(Return_ID, Customer_ID,Product_name,Return_date,IsOnline,Return_reason) 
+values(next value for Return_ID_seq, (select Customer_ID from Customer where first_name = 'Kyle'),'10x10 paper box ','19-JAN-2022','y','Box broke apart')
+insert into Returns(Return_ID, Customer_ID,Product_name,Return_date,IsOnline,Return_reason) 
+values(next value for Return_ID_seq, (select Customer_ID from Customer where first_name = 'John'),'Sticky notes ','01-OCT-2022','y','Glue is weak')
+insert into Returns(Return_ID, Customer_ID,Product_name,Return_date,IsOnline,Return_reason) 
+values(next value for Return_ID_seq, (select Customer_ID from Customer where first_name = 'Steven'),'Hp printer ','28-JUN-2022','y','Printer dones not print both sides')
 
+
+
+insert into Face_to_face_returns(Return_ID)
+values(2);
+insert into Face_to_face_returns(Return_ID)
+values(3);
+insert into Face_to_face_returns(Return_ID)
+values(4);
+insert into Face_to_face_returns(Return_ID)
+values(5);
+insert into Face_to_face_returns(Return_ID)
+values(6);
+insert into Face_to_face_returns(Return_ID)
+values(7);
+insert into Face_to_face_returns(Return_ID)
+values(10);
+insert into Face_to_face_returns(Return_ID)
+values(8);
+insert into Face_to_face_returns(Return_ID)
+values(1);
+insert into Face_to_face_returns(Return_ID)
+values(9);
+
+insert into Online_returns(Return_ID)
+values(1);
+insert into Online_returns(Return_ID)
+values(7);
+insert into Online_returns(Return_ID)
+values(8);
+insert into Online_returns(Return_ID)
+values(9);
+insert into Online_returns(Return_ID)
+values(10);
 
 -- inserting into Purchase 
 
@@ -264,85 +309,33 @@ insert into Purchase(Purchase_ID, Customer_ID,Total_price,Purchase_date,IsOnline
 values(next value for Purchase_ID_seq, (select Customer_ID from Customer where First_name = 'Marry'), 50, '28-SEP-2022', 'n')
 insert into Purchase(Purchase_ID, Customer_ID,Total_price,Purchase_date,IsOnline)
 values(next value for Purchase_ID_seq, (select Customer_ID from Customer where First_name = 'Ernest'), 62, '21-SEP-2022', 'y')
+insert into Purchase(Purchase_ID, Customer_ID,Total_price,Purchase_date,IsOnline)
+values(next value for Purchase_ID_seq, (select Customer_ID from Customer where First_name = 'Kylian'), 62, '02-MAR-2022', 'y')
+insert into Purchase(Purchase_ID, Customer_ID,Total_price,Purchase_date,IsOnline)
+values(next value for Purchase_ID_seq, (select Customer_ID from Customer where First_name = 'Jake'), 20, '11-JUN-2021', 'n')
+insert into Purchase(Purchase_ID, Customer_ID,Total_price,Purchase_date,IsOnline)
+values(next value for Purchase_ID_seq, (select Customer_ID from Customer where First_name = 'John'), 10, '14-DEC-2020', 'n')
+insert into Purchase(Purchase_ID, Customer_ID,Total_price,Purchase_date,IsOnline)
+values(next value for Purchase_ID_seq, (select Customer_ID from Customer where First_name = 'Mohammad'), 8, '23-OCT-2019', 'n')
+insert into Purchase(Purchase_ID, Customer_ID,Total_price,Purchase_date,IsOnline)
+values(next value for Purchase_ID_seq, (select Customer_ID from Customer where First_name = 'Steven'), 31, '27-FEB-2022', 'y')
 
-select * from Purchase
-select * from Face_to_face
-select * from Online
 
-insert into Face_to_face(Purchase_ID) values (1)
-insert into Face_to_face(Purchase_ID) values (2)
-insert into Face_to_face(Purchase_ID) values (6)
+insert into Face_to_face(Purchase_ID) values (3)
+insert into Face_to_face(Purchase_ID) values (4)
+insert into Face_to_face(Purchase_ID) values (5)
+insert into Face_to_face(Purchase_ID) values (8)
+insert into Face_to_face(Purchase_ID) values (9)
+insert into Face_to_face(Purchase_ID) values (10)
 
-insert into Online(Purchase_ID) values (3)
-insert into Online(Purchase_ID) values (4)
-insert into Online(Purchase_ID) values (5)
-
-insert into Customer_product(Product_ID,Customer_ID,Quantity)
-values((select Product_ID from Product where Product_name = 'Duct tape'),(select Customer_ID from Customer where first_name = 'John'), 2 )
-insert into Customer_product(Product_ID,Customer_ID,Quantity)
-values((select Product_ID from Product where Product_name = 'Ink Curtridge'),(select Customer_ID from Customer where first_name = 'Sadio'), 3 )
-insert into Customer_product(Product_ID,Customer_ID,Quantity)
-values((select Product_ID from Product where Product_name = 'Stapler'),(select Customer_ID from Customer where first_name = 'Marry'), 1 )
-insert into Customer_product(Product_ID,Customer_ID,Quantity)
-values((select Product_ID from Product where Product_name = 'Sticky notes'),(select Customer_ID from Customer where first_name = 'Ernest'), 11 )
-insert into Customer_product(Product_ID,Customer_ID,Quantity)
-values((select Product_ID from Product where Product_name = 'Gel pens'),(select Customer_ID from Customer where first_name = 'Jake'), 6 )
-insert into Customer_product(Product_ID,Customer_ID,Quantity)
-values((select Product_ID from Product where Product_name = 'Brothers model34 printer ink'),(select Customer_ID from Customer where first_name = 'Kyle'), 2 )
-insert into Customer_product(Product_ID,Customer_ID,Quantity)
-values((select Product_ID from Product where Product_name = 'Duct tape'),(select Customer_ID from Customer where first_name = 'Michelle'), 15 )
-
+insert into Online(Purchase_ID) values (1)
+insert into Online(Purchase_ID) values (2)
+insert into Online(Purchase_ID) values (6)
+insert into Online(Purchase_ID) values (7)
+insert into Online(Purchase_ID) values (11)
 
 
 -- procedures
-
-Create or Alter Procedure In_person_returns 
-@Return_ID Decimal(12),@Customer_ID Decimal(2),@Product_name varchar(255),
-@Return_date Date, @IsOnline Char(1), @Return_reason varchar(1024)
-as
-begin
-	Insert Into Returns(Return_ID,Customer_ID,Product_name,Return_date,IsOnline,Return_reason)
-	values(@Return_ID, @Customer_ID, @Product_name,@Return_date, @IsOnline , @Return_reason);
-
-	insert into Face_to_face_returns(Return_ID)
-	values(@Return_ID);
-end;
-go
-
-begin transaction In_person_returns;
-execute In_person_returns 5,2, 'Gel pens','01-FEB-2019','n','Product defective'
-commit transaction In_person_returns
-
-begin transaction In_person_returns;
-execute In_person_returns 9,6, 'Sticky notes','01-JUL-2022','n','Product defective'
-commit transaction In_person_returns
-
-
-begin transaction In_person_returns;
-execute In_person_returns 6,5, 'Duct tape','31-OCT-2022','n','Product not strong enough'
-commit transaction In_person_returns
-
-
-Create or Alter Procedure Online_returns_list
-@Return_ID Decimal(12),@Customer_ID Decimal(2),@Product_name varchar(255),
-@Return_date Date, @IsOnline Char(1), @Return_reason varchar(1024)
-as
-begin
-	Insert Into Returns(Return_ID,Customer_ID,Product_name,Return_date,IsOnline,Return_reason)
-	values(@Return_ID, @Customer_ID, @Product_name,@Return_date, @IsOnline , @Return_reason);
-
-	insert into Online_returns(Return_ID)
-	values(@Return_ID);
-end;
-go
-
-begin transaction Online_returns_list;
-execute Online_returns_list 7,10, 'Ink Curtridge','20-AUG-2022','y','Product arrived late'
-commit transaction Online_returns_list
-
-begin transaction Online_returns_list;
-execute Online_returns_list 8,8, 'Stapler','03-NOV-2021','y','Product was damaged'
-commit transaction Online_returns_list
 
 Create or Alter Procedure Add_shipping_product 
 @Product_ID Decimal(12),@Store_ID Decimal(2),@Product_name varchar(255),
@@ -363,12 +356,14 @@ execute Add_shipping_product  1, 1, 'Duct tape', 'Clear duct tape',1,1,2,'04-DEC
 commit transaction Add_shipping_product 
 
 begin transaction Add_shipping_product ;
-execute Add_shipping_product  2, 2, 'Ink Curtridge', 'Ink for HP printer',2,2,2,'14-MAY-2021';
+execute Add_shipping_product  2, 2, '10x10 paper box', 'standar shipping box',2,2,2,'14-MAY-2021';
 commit transaction Add_shipping_product 
 
 begin transaction Add_shipping_product ;
-execute Add_shipping_product  3, 2, 'Brothers model34 printer ink', 'Ink for HP printer',7,3,1,'14-MAY-2021';
+execute Add_shipping_product  3, 2, 'Hazard label', 'Stick it into the hazardaous box',7,3,1,'14-MAY-2021';
 commit transaction Add_shipping_product 
+
+
 
 Create or Alter Procedure Add_Printing_product 
 @Product_ID Decimal(12),@Store_ID Decimal(2),@Product_name varchar(255),
@@ -385,6 +380,20 @@ end;
 go
 
 
+begin transaction Add_Printing_product ;
+execute Add_Printing_product  9, 3, 'Printing paper', '500 papers white for printing',8,8,4,'29-MAY-2022';
+commit transaction Add_Printing_product 
+
+
+begin transaction Add_Printing_product ;
+execute Add_Printing_product  10, 4, 'Laser Ink Cartridge', 'Ink that never dies',9,9,2,'22-MAR-2022';
+commit transaction Add_Printing_product 
+
+begin transaction Add_Printing_product ;
+execute Add_Printing_product  11, 1, 'HP printer', 'wireless printer',10,10,5,'10-MAR-2022';
+commit transaction Add_Printing_product 
+
+
 
 Create or Alter Procedure Add_Office_product 
 @Product_ID Decimal(12),@Store_ID Decimal(2),@Product_name varchar(255),
@@ -395,7 +404,7 @@ begin
 	Insert Into Product(Product_ID,Store_ID,Product_name,Product_description,Return_ID,Transaction_ID,Distributor_ID,Sale_date)
 	values(@Product_ID, @Store_ID, @Product_name,@Product_description, @Return_ID, @Transaction_ID,@Distributor_ID, @Sale_date);
 
-	insert into Printing_supply(Product_ID)
+	insert into Office_supply(Product_ID)
 	values(@Product_ID);
 end;
 go
@@ -412,15 +421,112 @@ begin transaction Add_Office_product ;
 execute Add_Office_product  6, 5, 'Sticky notes', 'Yellow sticky notes',9,5,3,'21-NOV-2020';
 commit transaction Add_Office_product 
 
-select * from Store_Address
-select * from Store_location
-select * from Distributor
-select * from Product
-select * from Customer
-select * from Customer_product
-select * from Returns
-select * from Purchase
+begin transaction Add_Office_product ;
+execute Add_Office_product  7, 1, 'Stapler', 'Stapler',4,6,4,'18-SEP-2022';
+commit transaction Add_Office_product 
+
+begin transaction Add_Office_product ;
+execute Add_Office_product  8, 2,  'Gel pens', 'Blue pens',3,7,1,'03-AUG-2022';
+commit transaction Add_Office_product 
 
 
 
 
+-- inserting into customer_product table 
+
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Duct tape'),(select Customer_ID from Customer where first_name = 'John'), 2 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = '10x10 paper box'),(select Customer_ID from Customer where first_name = 'Sadio'), 3 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_description = 'Stapler'),(select Customer_ID from Customer where first_name = 'Marry'), 1 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Sticky notes'),(select Customer_ID from Customer where first_name = 'Ernest'), 11 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_description = 'Blue pens'),(select Customer_ID from Customer where first_name = 'Jake'), 6 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Hazard label'),(select Customer_ID from Customer where first_name = 'Kyle'), 2 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Duct tape'),(select Customer_ID from Customer where first_name = 'Michelle'), 15 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_description = 'Black pens'),(select Customer_ID from Customer where first_name = 'Kylian'), 5 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_description = 'Blue large stapler'),(select Customer_ID from Customer where first_name = 'John'), 2 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_description = 'Black pens'),(select Customer_ID from Customer where first_name = 'Mohammad'), 3 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Duct tape'),(select Customer_ID from Customer where first_name = 'Sadio'), 10 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Sticky notes'),(select Customer_ID from Customer where first_name = 'Steven'), 1 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Printing paper'),(select Customer_ID from Customer where first_name = 'Ernest'), 2 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Printing paper'),(select Customer_ID from Customer where first_name = 'Michelle'), 5 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Printing paper'),(select Customer_ID from Customer where first_name = 'Jake'), 1 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Laser Ink Cartridge'),(select Customer_ID from Customer where first_name = 'Kyle'), 2 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Printing paper'),(select Customer_ID from Customer where first_name = 'Marry'), 1 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Printing paper'),(select Customer_ID from Customer where first_name = 'Kylian'), 5 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_description = 'Black pens'),(select Customer_ID from Customer where first_name = 'Sadio'), 2 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = 'Hazard label'),(select Customer_ID from Customer where first_name = 'John'), 4 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_name = '10x10 paper box'),(select Customer_ID from Customer where first_name = 'Kyle'), 10 )
+insert into Customer_product(Product_ID,Customer_ID,Quantity)
+values((select Product_ID from Product where Product_description = 'Stapler'),(select Customer_ID from Customer where first_name = 'Mohammad'), 5 )
+
+
+
+
+--questions
+
+--Find out how many shipping supplies have been sold prior to last 12 months and list the names of the customer’s name and their phone number.
+
+select Product.Product_name,Customer.First_name,Customer.Last_name, Customer.Phone_number, Purchase_date,Quantity from Product
+join Shipping_supply on Shipping_supply.Product_ID = Product.Product_ID
+join Customer_product on Customer_product.Product_ID = Product.Product_ID
+join Customer on Customer_product.Customer_ID = Customer.Customer_ID
+join Purchase on Purchase.Customer_ID =Customer.Customer_ID
+where Purchase_date > dateadd(m, -12, GETDATE()) 
+order by Quantity asc
+
+
+
+--what stores have sold how many products and of those, which ones were sold online? 
+--Also, find out store state and address so it can be used for analysis i.e. what products are popular in what state..
+create or alter view Store_performance as
+	select Store_location.Store_ID, count(*) as nr_sold_online from Store_location
+	join Product on Product.Store_ID = Store_location.Store_ID
+	join Customer_product on Customer_product.Product_ID = Product.Product_ID
+	join Purchase on Purchase.Customer_ID = Customer_product.Customer_ID
+	join Online on Online.Purchase_ID = Purchase.Purchase_ID
+	--join Face_to_face on Face_to_face.Purchase_ID = Purchase.Purchase_ID
+	where Purchase.IsOnline = 'y'
+	group by Store_location.Store_ID;
+
+select Store_Address.Store_street, Store_State.Store_state, Store_performance.Store_ID,count(Quantity) as total_sold, Store_performance.nr_sold_online from Store_performance
+join Store_location on Store_location.Store_ID = Store_performance.Store_ID
+join Product on Product.Store_ID = Store_location.Store_ID
+join Customer_product on Customer_product.Product_ID = Product.Product_ID
+join Store_Address on Store_Address.Store_address_ID = Store_location.Store_address_ID
+join Store_State on Store_Address.Store_state_code = Store_State.Store_state_code
+group by Store_Address.Store_street, Store_State.Store_state, Store_performance.Store_ID, Store_performance.nr_sold_online
+
+
+
+--Find out the names of the distributors whose products have been returned more than twice in the last 11 months that was in-person returns. 
+
+
+select Distributor.Distributor_name from Distributor
+where Distributor.Distributor_ID in
+(select Distributor.Distributor_ID from Distributor
+join Product on Product.Distributor_ID = Distributor.Distributor_ID
+join Returns on Returns.Return_ID = Product.Return_ID
+join Face_to_face_returns on Face_to_face_returns.Return_ID = Returns.Return_ID
+where Returns.Return_date > dateadd(m, -11, GETDATE())
+group by Distributor_name, Distributor.Distributor_ID
+having (count(*) ) >= 2) 
