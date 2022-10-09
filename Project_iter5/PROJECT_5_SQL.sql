@@ -43,11 +43,20 @@ Store_state_code char(2) not null
 foreign key (Store_state_code) references Store_State(Store_state_code)
 );
 
+-- index
+create Index Add_Statecode
+on Store_Address(Store_state_code)
+
 Create Table Store_location(
 Store_ID Decimal(2) not null primary key,
 Store_address_ID Decimal(2) not null
 foreign key (Store_address_ID) references Store_Address(Store_address_ID)
 );
+
+-- index
+create unique Index Add_Store_add
+on Store_location(Store_address_ID)
+
 
 Create Table Customer(
 Customer_ID Decimal(2) not null primary key,
@@ -64,6 +73,11 @@ Customer_ID Decimal(2) not null,
 foreign key (Customer_ID) references Customer(Customer_ID)
 );
 
+-- index
+create unique Index Add_Customer_ID
+on Address(Customer_ID)
+
+
 Create Table Returns(
 Return_ID Decimal(12) not null primary key,
 Customer_ID Decimal(2) not null,
@@ -71,23 +85,36 @@ Product_name varchar(255) not null,
 Return_date Date not null,
 IsOnline Char(1) not null,
 Return_reason varchar(1024) not null,
-foreign key (Customer_ID) references Customer(Customer_ID)
+foreign key (Customer_ID) references Customer(Customer_ID) 
 );
+--index
+create Index Add_Customer_ID
+on Returns(Customer_ID)
+
 
 Create Table Face_to_face_returns(
 Return_ID Decimal(12) not null primary key,
 foreign key (Return_ID) references Returns(Return_ID)
 );
 
+-- index
+create unique Index Add_Face_to_face_returns
+on Face_to_face_returns(Return_ID)
+
 Create Table Online_returns(
 Return_ID Decimal(12) not null primary key,
 foreign key (Return_ID) references Returns(Return_ID)
 );
 
+-- index
+create unique Index Add_Online_returns
+on Online_returns(Return_ID)
+
 Create Table Distributor(
 Distributor_ID Decimal(2) not null primary key,
 Distributor_name varchar(255) not null
 );
+
 Create Table Product(
 Product_ID Decimal(12) not null primary key,
 Store_ID Decimal(2) not null,
@@ -102,21 +129,40 @@ foreign key (Return_ID) references Returns(Return_ID),
 foreign key (Distributor_ID) references Distributor(Distributor_ID)
 );
 
+-- index
+create Index Add_Product_Store
+on Product(Store_ID)
+create Index Add_Product_Ret
+on Product(Return_ID)
+create Index Add_Product_Dis
+on Product(Distributor_ID)
+
 Create Table Shipping_supply(
 Product_ID Decimal(12) not null primary key,
 foreign key (Product_ID) references Product(Product_ID),
 );
+
+-- index
+create Index Add_Shipping_supply
+on Shipping_supply(Product_ID)
 
 Create Table Office_supply(
 Product_ID Decimal(12) not null primary key,
 foreign key (Product_ID) references Product(Product_ID),
 );
 
+-- index
+create Index Add_Office_supply
+on Office_supply(Product_ID)
+
 Create Table Printing_supply(
 Product_ID Decimal(12) not null primary key,
 foreign key (Product_ID) references Product(Product_ID),
 );
 
+-- index
+create Index Add_Printing_supply
+on Printing_supply(Product_ID)
 
 
 Create Table Customer_product(
@@ -127,7 +173,11 @@ foreign key (Product_ID) references Product(Product_ID),
 foreign key (Customer_ID) references Customer(Customer_ID)
 );
 
-
+-- index
+create Index Add_Customer_product
+on Customer_product(Product_ID)
+create Index Add_Customer_product_Customer_ID
+on Customer_product(Customer_ID)
 
 Create Table Purchase(
 Purchase_ID Decimal(12) not null primary key,
@@ -138,6 +188,10 @@ IsOnline Char(1) not null
 foreign key (Customer_ID) references Customer(Customer_ID)
 );
 
+-- index
+create Index Add_Purchase
+on Purchase(Customer_ID)
+
 Create Table Face_to_face(
 Purchase_ID Decimal(12) not null primary key,
 foreign key (Purchase_ID) references Purchase(Purchase_ID)
@@ -147,6 +201,12 @@ Create Table Online(
 Purchase_ID Decimal(12) not null primary key,
 foreign key (Purchase_ID) references Purchase(Purchase_ID)
 );
+
+-- index
+create Index Add_Face_to_face
+on Face_to_face(Purchase_ID)
+create Index Add_Online
+on Online(Purchase_ID)
 
 
 
@@ -494,6 +554,12 @@ join Purchase on Purchase.Customer_ID =Customer.Customer_ID
 where Purchase_date > dateadd(m, -12, GETDATE()) 
 order by Quantity asc
 
+-- index
+create Index Add_Purchase_Date
+on Purchase(Purchase_date)
+
+
+
 
 
 --what stores have sold how many products and of those, which ones were sold online? 
@@ -507,6 +573,10 @@ create or alter view Store_performance as
 	--join Face_to_face on Face_to_face.Purchase_ID = Purchase.Purchase_ID
 	where Purchase.IsOnline = 'y'
 	group by Store_location.Store_ID;
+
+--index
+create Index Add_IsOnline
+on Purchase(IsOnline)
 
 select Store_Address.Store_street, Store_State.Store_state, Store_performance.Store_ID,count(Quantity) as total_sold, Store_performance.nr_sold_online from Store_performance
 join Store_location on Store_location.Store_ID = Store_performance.Store_ID
