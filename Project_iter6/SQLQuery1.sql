@@ -652,9 +652,23 @@ select Product_ID,sum(Quantity)  from Customer_product
 group by Customer_product.Product_ID
 select Product_name,Store_ID from Product 
 
+select Returns.Customer_ID,Returns.Return_ID,Customer.Last_name,Product.Product_name from Returns
+join Customer on Customer.Customer_ID = Returns.Return_ID
+join Product on Product.Product_name = Returns.Product_name
+group by Product.Product_name,Customer.Last_name,Returns.Return_ID,Returns.Customer_ID
+
+select Product.Store_ID,Returns.Product_name, Store_Address.Store_city from Product
+join Returns on Returns.Product_name = Product.Product_name
+join Store_location on Store_location.Store_ID = Product.Store_ID
+join Store_Address on Store_Address.Store_address_ID= Store_location.Store_address_ID
+where Returns.IsOnline = 'n'
+
+
 select* from Store_location
 select * from Product
 select * from Returns	
 select * from Purchase
-
+select * from Distributor
+select * from Customer
+select * from Returns
 select * from Customer_product
